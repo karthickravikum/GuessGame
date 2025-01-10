@@ -18,13 +18,18 @@ document.getElementById('btn').addEventListener('click', function () {
                 document.querySelector('img').src = 'lock-removebg-preview.png';
                 display('Guess the number to open Box ' + (boxCount + 1) + '.');
                 document.getElementById('guessInput').value = '';
-            }, 5000);
+            }, 3000);
 
-            if (boxCount === 5) {
+            if (boxCount === 6) {
                 display("Congratulations! You won the game!");
-                document.getElementById('btn').disabled = true;
-                document.getElementById('guessInput').disabled = true;
+                setTimeout(() => {
+                    display("Thank You for playing!");
+                    setTimeout(() => {
+                        resetGame();  
+                    }, 2000); 
+                }, 4000); 
             }
+
 
             break;
         } else if (guess < randomNumber) {
@@ -44,4 +49,13 @@ document.getElementById('btn').addEventListener('click', function () {
 
 function display(msg) {
     document.getElementById('msg').textContent = msg;
+}
+
+function resetGame() {
+    randomNumber = Math.floor(Math.random() * 100) + 1; 
+    attempts = 10;
+    boxCount = 0; 
+    document.getElementById('guessInput').value = ''; 
+    document.querySelector('img').src = 'lock-removebg-preview.png'; 
+    display('Guess the number to open Box 1.'); 
 }
